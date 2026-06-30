@@ -4,7 +4,6 @@
 
 ## Informações do projeto
 
-Preencha os campos abaixo antes da entrega ou publicação:
 
 | Item                      | Informação                    |
 | ------------------------- | ----------------------------- |
