@@ -1,5 +1,9 @@
 # Credenciais e ambientes virtuais
-.env
+.env*
+!.env.example
+.streamlit/secrets.toml
+*.key
+*.pem
 .venv/
 venv/
 
@@ -12,3 +16,29 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 .DS_Store
+
+servidor-local*.log
+servidor-local.pid
+
+# Arquivos locais de preparacao, diagnostico e backup
+*.log
+*.pid
+*.before-*
+preparacao-oracle/
+preparacao-publicacao/
+CATALOGO-NVIDIA.json
+DIAGNOSTICO-410.json
+VALIDACAO-*.json
+VALIDACAO-*.txt
+INSTRUCOES-LOCAL.md
+INSTRUCOES-ORACLE.md
+aplicar-visual.py
+atualizar-modelo.py
+consultar-modelos.py
+corrigir-header.py
+diagnosticar-410.py
+iniciar-local.cmd
+requirements-local-lock.txt
+requirements-ubuntu-lock.txt
+run-loopback.sh
+teste-inferencia-local.py

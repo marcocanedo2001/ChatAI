@@ -1,0 +1,19 @@
+[Unit]
+Description=ChatAI academico (Streamlit)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/apps/chatai-academico
+# O systemd carrega o .env; o aplicativo nao precisa reler o arquivo.
+Environment=PYTHON_DOTENV_DISABLED=1
+EnvironmentFile=/home/ubuntu/apps/chatai-academico/.env
+ExecStart=/home/ubuntu/apps/chatai-academico/.venv/bin/python -m streamlit run /home/ubuntu/apps/chatai-academico/app.py --server.address 127.0.0.1 --server.port 8501 --server.headless true --browser.gatherUsageStats false --server.enableCORS true --server.enableXsrfProtection true
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

@@ -4,18 +4,35 @@ from chatlas import Chat, ChatOpenAICompletions, Turn, UserTurn
 from dotenv import load_dotenv
 import streamlit as st
 
-DEFAULT_MODEL = "nvidia/nemotron-3-nano-30b-a3b"
+DEFAULT_MODEL = "nvidia/nemotron-3.5-lightning-30b-a3b"
 DEFAULT_BASE_URL = "https://integrate.api.nvidia.com/v1"
 
 load_dotenv()
 
-st.set_page_config(page_title="Chatbot NVIDIA", page_icon="💬")
-st.title("Chatbot NVIDIA NIM")
-st.caption("Converse com um modelo open source da NVIDIA com streaming via Chatlas.")
+st.set_page_config(page_title="ChatAI", page_icon="💬", layout="centered")
+st.markdown(
+    """<style>
+    .stMainBlockContainer {max-width: 860px; padding-top: 2.5rem;}
+    h1 {letter-spacing: -0.035em;}
+    [data-testid="stChatMessage"] {border-radius: 16px; padding: 1rem;}
+    @media (max-width: 600px) {
+        .stMainBlockContainer {padding-top: 1.5rem; padding-left: 1rem; padding-right: 1rem;}
+    }
+    </style>""",
+    unsafe_allow_html=True,
+)
+st.caption("PROJETO ACADÊMICO · INTELIGÊNCIA ARTIFICIAL")
+st.title("ChatAI")
+st.write("Uma pergunta, uma ideia, uma conversa.")
 
-api_key = os.getenv("NVIDIA_API_KEY")
-model = os.getenv("NVIDIA_MODEL", DEFAULT_MODEL)
-base_url = os.getenv("NVIDIA_BASE_URL", DEFAULT_BASE_URL)
+api_key = (os.getenv("NVIDIA_API_KEY") or "").strip()
+model = (os.getenv("NVIDIA_MODEL") or "").strip() or DEFAULT_MODEL
+base_url = (os.getenv("NVIDIA_BASE_URL") or "").strip() or DEFAULT_BASE_URL
+
+with st.expander("Sobre este projeto", expanded=False):
+    st.markdown("Chatbot da disciplina **Produtos de GenAI**, desenvolvido com Python, Streamlit e Chatlas.")
+    st.caption("As respostas são geradas pela NVIDIA. O histórico permanece nesta sessão.")
+    st.text(f"Modelo: {model}")
 
 if "turns" not in st.session_state:
     st.session_state.turns = []
@@ -53,7 +70,7 @@ for turn in chat.get_turns():
     render_turn(turn)
 
 
-if prompt := st.chat_input("Digite sua mensagem"):
+if prompt := st.chat_input("O que você gostaria de explorar?"):
     with st.chat_message("user"):
         st.markdown(prompt)
 
